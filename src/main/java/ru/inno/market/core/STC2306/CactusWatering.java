@@ -1,33 +1,41 @@
 package org.STC2306;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class CactusWatering {
     public static void main(String... args) {
-        LocalDate lastWateringDate = LocalDate.of(2021, 9, 1); // пример даты последнего полива
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Р’РІРµРґРёС‚Рµ РіРѕРґ РґР°С‚С‹ РїРѕСЃР»РµРґРЅРµРіРѕ РїРѕР»РёРІР°: ");
+        int year = scanner.nextInt();
+
+        System.out.print("Р’РІРµРґРёС‚Рµ РјРµСЃСЏС† (С‡РёСЃР»Рѕ РѕС‚ 1 РґРѕ 12) РґР°С‚С‹ РїРѕСЃР»РµРґРЅРµРіРѕ РїРѕР»РёРІР°: ");
+        int month = scanner.nextInt();
+
+        System.out.print("Р’РІРµРґРёС‚Рµ РґРµРЅСЊ (С‡РёСЃР»Рѕ РѕС‚ 1 РґРѕ 31) РґР°С‚С‹ РїРѕСЃР»РµРґРЅРµРіРѕ РїРѕР»РёРІР°: ");
+        int day = scanner.nextInt();
+
+        LocalDate lastWateringDate = LocalDate.of(year, month, day);
         LocalDate currentDate = LocalDate.now();
         String message;
 
-        if (currentDate.getMonthValue() >= 12 || currentDate.getMonthValue() <= 2) {
+        if (currentDate.getMonthValue() == 12 || currentDate.getMonthValue() <= 2) {
             if (currentDate.minusMonths(1).isAfter(lastWateringDate)) {
-                message = "Кактус нужно полить раз в месяц зимой. Последний полив был " + lastWateringDate.plusMonths(1);
+                message = "РљР°РєС‚СѓСЃ РЅСѓР¶РЅРѕ РїРѕР»РёС‚СЊ. РџСЂРѕС€Р»Рѕ Р±РѕР»СЊС€Рµ РјРµСЃСЏС†Р° СЃ РґР°С‚С‹ РїРѕСЃР»РµРґРЅРµРіРѕ РїРѕР»РёРІР°" + "(" + lastWateringDate + ").";
             } else {
-                message = "Кактус не нужно поливать зимой";
+                message = "РљР°РєС‚СѓСЃ РЅРµ РЅСѓР¶РЅРѕ РїРѕР»РёРІР°С‚СЊ. РџСЂРѕС€Р»Рѕ РјРµРЅСЊС€Рµ РјРµСЃСЏС†Р° СЃ РґР°С‚С‹ РїРѕСЃР»РµРґРЅРµРіРѕ РїРѕР»РёРІР°" + "(" + lastWateringDate + ").";
             }
-        } else if (currentDate.getMonthValue() <= 5 || currentDate.getMonthValue() >= 9) {
-            if (currentDate.minusWeeks(1).isAfter(lastWateringDate)) {
-                message = "Кактус нужно полить раз в неделю весной и осенью. Последний полив был " + lastWateringDate.plusWeeks(1);
-            } else {
-                message = "Кактус не нужно поливать весной и осенью";
-            }
+        } else if ((currentDate.getMonthValue() <= 5 || currentDate.getMonthValue() >= 9)) {
+            message = "РљР°РєС‚СѓСЃ РЅСѓР¶РЅРѕ РїРѕР»РёС‚СЊ. РџСЂРѕС€Р»Рѕ Р±РѕР»СЊС€Рµ РЅРµРґРµР»Рё СЃ РґР°С‚С‹ РїРѕСЃР»РµРґРЅРµРіРѕ РїРѕР»РёРІР° " + "(" + lastWateringDate + ").";
+
         } else {
             int humidity = Sensor.getHumidity();
             if (humidity < 30) {
-                message = "Кактус нужно полить, так как влажность воздуха ниже 30%";
+                message = "РљР°РєС‚СѓСЃ РЅСѓР¶РЅРѕ РїРѕР»РёС‚СЊ, С‚Р°Рє РєР°Рє РІР»Р°Р¶РЅРѕСЃС‚СЊ РІРѕР·РґСѓС…Р° РЅРёР¶Рµ 30% " + "(" + humidity + "%). Р”Р°С‚Р° РїРѕСЃР»РµРґРЅРµРіРѕ РїРѕР»РёРІР°: "  + lastWateringDate + ".";
             } else if (currentDate.minusDays(2).isAfter(lastWateringDate)) {
-                message = "Кактус нужно полить, так как прошло более двух дней с последнего полива";
+                message = "РљР°РєС‚СѓСЃ РЅСѓР¶РЅРѕ РїРѕР»РёС‚СЊ, С‚Р°Рє РєР°Рє РїСЂРѕС€Р»Рѕ Р±РѕР»РµРµ РґРІСѓС… РґРЅРµР№ СЃ РґР°С‚С‹ РїРѕСЃР»РµРґРЅРµРіРѕ РїРѕР»РёРІР°. Р”Р°С‚Р° РїРѕСЃР»РµРґРЅРµРіРѕ РїРѕР»РёРІР°: "  + lastWateringDate + ".";
             } else {
-                message = "Кактус не нужно поливать летом";
+                message = "РљР°РєС‚СѓСЃ РЅРµ РЅСѓР¶РЅРѕ РїРѕР»РёРІР°С‚СЊ, С‚Р°Рє РєР°Рє РїРѕСЃР»РµРґРЅРёР№ РїРѕР»РёРІ Р±С‹Р» РјРµРЅРµРµ РґРІСѓС… РґРЅРµР№ РЅР°Р·Р°Р». Р—РЅР°С‡РµРЅРёРµ РґР°С‚С‡РёРєРµ РІР»Р°Р¶РЅРѕСЃС‚Рё: " + humidity + "%. Р”Р°С‚Р° РїРѕСЃР»РµРґРЅРµРіРѕ РїРѕР»РёРІР°: "  + lastWateringDate + ".";
             }
         }
 
