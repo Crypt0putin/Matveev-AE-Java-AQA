@@ -7,17 +7,17 @@ public class LoveMessage {
         Scanner scanner = new Scanner(System.in);
         int fenceLength, letterLength, spaceLength, messageLength;
 
-        letterLength = 62; // длина трех букв
-        spaceLength = 12; // длина одного пробела
-        messageLength = letterLength * 5 + spaceLength * 2; // длина сообщения
-
-        System.out.print("Введите длину забора: ");
+        letterLength = 62; // РґР»РёРЅР° С‚СЂРµС… Р±СѓРєРІ
+        spaceLength = 12; // РґР»РёРЅР° РѕРґРЅРѕРіРѕ РїСЂРѕР±РµР»Р°
+        messageLength = letterLength * 5 + spaceLength * 2; // РґР»РёРЅР° СЃРѕРѕР±С‰РµРЅРёСЏ
+ 
+        System.out.print("Р’РІРµРґРёС‚Рµ РґР»РёРЅСѓ Р·Р°Р±РѕСЂР°: ");
         fenceLength = scanner.nextInt();
 
         if (fenceLength >= messageLength) {
-            System.out.println("На заборе поместится признание в любви!");
+            System.out.println("РќР° Р·Р°Р±РѕСЂРµ РїРѕРјРµСЃС‚РёС‚СЃСЏ РїСЂРёР·РЅР°РЅРёРµ РІ Р»СЋР±РІРё!");
         } else {
-            System.out.println("На заборе не хватит места для признания в любви.");
+            System.out.println("РќР° Р·Р°Р±РѕСЂРµ РЅРµ С…РІР°С‚РёС‚ РјРµСЃС‚Р° РґР»СЏ РїСЂРёР·РЅР°РЅРёСЏ РІ Р»СЋР±РІРё.");
         }
     }
 }
