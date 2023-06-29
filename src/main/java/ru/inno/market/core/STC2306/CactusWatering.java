@@ -27,9 +27,9 @@ public class CactusWatering {
             }
         } else if ((currentDate.getMonthValue() <= 5 || currentDate.getMonthValue() >= 9)) {
             message = "Кактус нужно полить. Прошло больше недели с даты последнего полива " + "(" + lastWateringDate + ").";
-
         } else {
-            int humidity = Sensor.getHumidity();
+            Sensor sensor = new Sensor();
+            int humidity = sensor.getHumidity();
             if (humidity < 30) {
                 message = "Кактус нужно полить, так как влажность воздуха ниже 30% " + "(" + humidity + "%). Дата последнего полива: "  + lastWateringDate + ".";
             } else if (currentDate.minusDays(2).isAfter(lastWateringDate)) {
